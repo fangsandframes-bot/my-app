@@ -3,9 +3,8 @@
 import React from 'react';
 import { Trophy, Wallet, Phone, CreditCard } from 'lucide-react';
 
-// --- MOCK UI COMPONENT DEFINITIONS (To fix Module Not Found errors) ---
+// --- MOCK UI COMPONENT DEFINITIONS --- //
 
-// 1. Mock Button component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   children?: React.ReactNode;
@@ -13,24 +12,39 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: React.FC<ButtonProps> = ({ className = "", children, ...props }) => (
   <button
-    className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 ${className}`}
+    className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 
+      disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 ${className}`}
     {...props}
   >
     {children}
   </button>
 );
 
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  children?: React.ReactNode;
+}
 
-// 3. Mock CardContent component
-const CardContent = ({ className, children, ...props }) => (
+const Card: React.FC<CardProps> = ({ className = "", children, ...props }) => (
+  <div className={`rounded-xl border border-gray-800 bg-gray-900 shadow-lg ${className}`} {...props}>
+    {children}
+  </div>
+);
+
+interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+const CardContent: React.FC<CardContentProps> = ({ className = "", children, ...props }) => (
   <div className={`p-6 pt-0 ${className}`} {...props}>
     {children}
   </div>
 );
 
-// --- MAIN PAGE COMPONENT ---
+// --- MAIN PAGE COMPONENT --- //
 
-// Fixed: Removed the ': JSX.Element' type annotation to clear the 'Cannot find namespace JSX' error.
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-black text-white font-inter">
@@ -67,7 +81,7 @@ export default function Home() {
         ].map((item, i) => (
           <Card
             key={i}
-            className="bg-gray-900 border border-gray-800 text-center rounded-2xl shadow-2xl hover:border-yellow-400/50 transition duration-300"
+            className="text-center rounded-2xl hover:border-yellow-400/50 transition duration-300"
           >
             <CardContent className="p-8">
               <div className="flex justify-center mb-4">{item.icon}</div>
@@ -87,7 +101,7 @@ export default function Home() {
             { name: 'BGMI Classic Cup', date: 'Nov 15, 2025', prize: '₹2,000' },
             { name: 'Valorant Rush', date: 'Nov 20, 2025', prize: '₹1,500' },
           ].map((t, i) => (
-            <Card key={i} className="bg-gray-800 border border-gray-700 p-6 rounded-xl hover:shadow-yellow-400/30 shadow-lg transition duration-300">
+            <Card key={i} className="p-6 rounded-xl hover:shadow-yellow-400/30 transition duration-300">
               <h3 className="text-2xl font-semibold mb-2 text-white">{t.name}</h3>
               <p className="text-gray-400 mt-2">📅 {t.date}</p>
               <p className="text-yellow-400 font-extrabold text-xl mt-4">
@@ -123,7 +137,7 @@ export default function Home() {
         <h2 className="text-4xl font-bold mb-8 text-yellow-400">💳 Payment Methods</h2>
         <div className="max-w-3xl mx-auto px-6 grid md:grid-cols-3 gap-6">
           {['UPI', 'Paytm', 'Razorpay'].map((method, i) => (
-            <Card key={i} className="bg-gray-800 border border-gray-700 p-6 rounded-xl">
+            <Card key={i} className="p-6 rounded-xl">
               <h3 className="text-2xl font-semibold text-yellow-400 mb-2">{method}</h3>
               <p className="text-gray-400">Instant and secure transactions</p>
             </Card>
