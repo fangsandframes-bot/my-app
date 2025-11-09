@@ -6,7 +6,12 @@ import { Trophy, Wallet, Phone, CreditCard } from 'lucide-react';
 // --- MOCK UI COMPONENT DEFINITIONS (To fix Module Not Found errors) ---
 
 // 1. Mock Button component
-const Button = ({ className, children, ...props }) => (
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+const Button: React.FC<ButtonProps> = ({ className = "", children, ...props }) => (
   <button
     className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 ${className}`}
     {...props}
@@ -15,15 +20,6 @@ const Button = ({ className, children, ...props }) => (
   </button>
 );
 
-// 2. Mock Card component
-const Card = ({ className, children, ...props }) => (
-  <div
-    className={`rounded-xl border bg-card text-card-foreground shadow ${className}`}
-    {...props}
-  >
-    {children}
-  </div>
-);
 
 // 3. Mock CardContent component
 const CardContent = ({ className, children, ...props }) => (
